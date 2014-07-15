@@ -1,0 +1,17 @@
+This module manage installation of sun-java6-jre and openjdk.
+This modules uses etc-java-alternatives to switch between this two package.
+
+Parameters: 
+- java_package: sun-java6 (default for Ubuntu Hardy) | openjdk-6-jre (default for Ubuntu Lucid)
+
+Samples usage:
+
+1) Install default package, depends on the release
+
+include java6
+
+2) Install a specific java package:
+
+class { "java6":
+    java_package  => "sun-java6",
+}
