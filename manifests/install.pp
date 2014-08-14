@@ -26,13 +26,17 @@ class java::install {
       }
 
       if $::lsbdistcodename == 'lucid' {
-        apt::key { $java::params::ferramroberto_ppa_key :
-          before  => [ Package['sun-java6-bin'], Package['sun-java6-jre'] ],
-        }
+        #apt_puppetlabs::source {'ferramroberto-java-lucid':
+        #  location    => 'http://ppa.launchpad.net/ferramroberto/java/ubuntu',
+        #  repos       => 'main',
+        #  key         => $java::params::ferramroberto_ppa_key,
+        #  include_src => false,
+        #  before  => [ Package['sun-java6-bin'], Package['sun-java6-jre'] ],
+        #}
 
-        apt::sources_list { 'ferramroberto-java-lucid':
-          content => "deb http://ppa.launchpad.net/ferramroberto/java/ubuntu $::lsbdistcodename main",
-          before  => [ Package['sun-java6-bin'], Package['sun-java6-jre'] ],
+        softec_apt::ppa {'ferramroberto/java':
+          mirror  => true,
+          key     => $java::params::ferramroberto_ppa_key
         }
       }
 
