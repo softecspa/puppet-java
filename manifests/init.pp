@@ -14,7 +14,8 @@ class java (
     '' => $::lsbdistcodename ? {
       hardy   => 'sun-java6',
       lucid   => 'openjdk-6-jre',
-      precise => 'openjdk-7-jre'
+      precise => 'openjdk-7-jre',
+      trusty  => 'openjdk-7-jre'
     },
     default => $java::java_package
   }
@@ -31,7 +32,7 @@ class java (
       }
     }
     'openjdk-7-jre': {
-      if ($::lsbdistcodename != 'precise') {
+      if ($::lsbdistcodename != 'precise') and ($::lsbdistcodename != 'trusty'){
         fail('openjdk-7-jre is available only in precise distribution')
       }
     }
